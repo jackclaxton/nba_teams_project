@@ -1,0 +1,70 @@
+.drawerClosed{
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  box-shadow: 1px 0px 7px rgba(0,0,0, 1);
+  background-color: white;
+  transform: translateX(100%);
+  transition: 0.3s ease-out;
+  z-index: 200;
+}
+.drawerOpen{
+  composes: drawerClosed;
+  transform: translateX(0);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--colors-secondary);
+  padding: 20px;
+}
+
+.gameInfoContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 30px 20px 0 20px;
+  
+}
+.teamInfoRow{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  text-align: left;
+}
+.infoBox{
+  width: 50%;
+  text-align: left;
+}
+.infoBox:last-child{
+  padding: 0 0 0 20px
+}
+.gameInfoRow{
+  composes: teamInfoRow;
+  padding: 0 0 0 15px;
+}
+@media only screen and (min-width: 560px){
+  .drawerClosed{
+    width: 65%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .drawerClosed{
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .drawerClosed{
+    width: 40%;
+  }
+}
+@media only screen and (min-width: 1200px){
+  .drawerClosed{
+    max-width: 500px;
+  }
+}

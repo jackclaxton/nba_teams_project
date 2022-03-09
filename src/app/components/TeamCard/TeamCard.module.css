@@ -1,0 +1,12 @@
+.teamCard{
+  background-color: var(--colors-secondary);
+  border-bottom: 5px solid var(--colors-background);
+  transition: 0.3s
+}
+.teamCard:hover{
+  background-color: var(--colors-secondary-hover);
+}
+.teamCardSelected{
+  composes: teamCard;
+  background-color: var(--colors-secondary-hover);
+}
