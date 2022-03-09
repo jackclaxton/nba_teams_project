@@ -24,20 +24,24 @@ const RootScreen = ({ fetchTeams, fetchPlayers, allTeams, fetchTeamGames, fetchA
   const onChangeSearchText = (event) => {
     const text = event.target.value;
     const lowerCaseText = text.toLowerCase()
+    let newFilteredTeams;
     let filteredTeams = Object.keys(allTeams).filter((key) => {
       let keyInt = parseInt(key);
       let teamInfo = allTeams[keyInt].teamInfo;
       return teamInfo.full_name.toLowerCase().includes(lowerCaseText)
     })
-    let newFilteredTeamsByTeam = Object.assign({}, filteredTeams.map((key) => allTeams[parseInt(key)]));
-
+    newFilteredTeams = Object.assign({}, filteredTeams.map((key) => allTeams[parseInt(key)]));
     let filteredPlayers = players.filter(({first_name, last_name}) => {
       const fullName = first_name.toLowerCase() + ' ' + last_name.toLowerCase();
         return fullName.includes(lowerCaseText);
     })
-    let newFilteredTeamsByPlayer = Object.assign({}, filteredPlayers.map((player) => allTeams[player.team.id]))
-    let newTeams = {...newFilteredTeamsByTeam, ...newFilteredTeamsByPlayer}
-    setDisplayedTeams(newTeams);
+    filteredPlayers.forEach((player) => {
+      const teamID = player.team.id;
+      if(!(teamID in newFilteredTeams)){
+        newFilteredTeams[teamID] = allTeams[teamID]
+      }
+    })
+    setDisplayedTeams(newFilteredTeams);
   }
 
   const onPressTeam = (teamID) => {
@@ -87,8 +91,7 @@ const RootScreen = ({ fetchTeams, fetchPlayers, allTeams, fetchTeamGames, fetchA
     <div className={styles.container}>
       <h1>NBA Teams</h1>
       <input 
-        type={'search'}
-        results
+        type={'text'}
         placeholder={'Search by team or player'}
         onChange={onChangeSearchText}/>
       <table>
