@@ -58,23 +58,11 @@ const RootScreen = ({ fetchTeams, fetchPlayers, allTeams, fetchTeamGames, fetchA
   
   const renderTeamsInfo = () => {
     if(fetchAllTeamsPending){
-      return(
-        <tr>
-          <td colSpan={5}><ActivityIndicator/></td>
-        </tr>
-      )
+      return <tr> <td colSpan={5}><ActivityIndicator/></td> </tr>
     }else if(fetchAllTeamsError){
-      return (
-        <tr>
-          <td colSpan={5}>{fetchAllTeamsError}. Refresh to retry</td>
-        </tr>
-      )
+      return <tr> <td colSpan={5}>{fetchAllTeamsError}. Refresh to retry</td> </tr>
     }else if(Object.keys(displayedTeams).length === 0){
-      return(
-        <tr>
-          <td colSpan={5}>No results. Try refining your search</td>
-        </tr>
-      )
+      return <tr> <td colSpan={5}>No results. Try refining your search</td> </tr>
     }else{
       return Object.keys(displayedTeams).map((key) => {
         return (
